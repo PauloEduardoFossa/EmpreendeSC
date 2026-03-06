@@ -29,6 +29,7 @@ __history/
 *.tds
 
 # Executables
+bin/
 *.exe
 
 # Database files (SQLite)
