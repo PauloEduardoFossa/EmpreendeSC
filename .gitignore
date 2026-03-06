@@ -1,26 +1,48 @@
-# Delphi
+# Delphi compiled units
 *.dcu
-*.local
+*.dcp
+*.bpl
+*.bpi
+*.lib
+*.obj
+*.hpp
+
+# Delphi IDE files
 *.identcache
 *.proj.local
 *.tvsconfig
 *.stat
-*.res
-*.map
 *.dsk
+*.local
 
 # Backup files
 *.~*
 *.bak
 
-# Debug
-Win32/Debug
-Win64/Debug
+# Build folders
+Win32/
+Win64/
+__history/
 
-# Release build
-Win32/Release
-Win64/Release
+# Debug symbols
+*.map
+*.tds
 
-# SQLite database
+# Executables
+*.exe
+
+# Database files (SQLite)
 *.db
 *.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*.temp
+
+# OS files
+Thumbs.db
+.DS_Store
