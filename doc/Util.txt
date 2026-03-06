@@ -1,0 +1,33 @@
+Para um projeto Delphi estruturado em MVC, o ideal é que o nome da unit deixe claro:
+
+	O módulo
+
+	A responsabilidade
+
+	O tipo da camada
+
+	<Modulo>.<Camada>.pas
+
+	MenuPrincipal.View.pas
+	Cliente.View.pas
+	Cliente.Controller.pas
+	Cliente.Service.pas
+	Cliente.Repository.pas
+	Cliente.Model.pas
+
+
+src
+   /view
+      App.Main.View.pas
+      Cliente.View.pas
+   /controller
+      App.Main.Controller.pas
+      Cliente.Controller.pas
+   /service
+      Cliente.Service.pas
+   /repository
+      Cliente.Repository.pas
+   /model
+      Cliente.Model.pas
+
+

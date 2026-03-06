@@ -1,0 +1,26 @@
+# Delphi
+*.dcu
+*.local
+*.identcache
+*.proj.local
+*.tvsconfig
+*.stat
+*.res
+*.map
+*.dsk
+
+# Backup files
+*.~*
+*.bak
+
+# Debug
+Win32/Debug
+Win64/Debug
+
+# Release build
+Win32/Release
+Win64/Release
+
+# SQLite database
+*.db
+*.sqlite

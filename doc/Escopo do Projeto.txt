@@ -1,0 +1,138 @@
+Escopo do Projeto – Desafio “IA para DEVs” (SCTEC / SENAI/SC LAB365)
+
+O escopo é desenvolver uma aplicação CRUD simples voltada ao contexto de empreendimentos em Santa Catarina, atendendo requisitos mínimos funcionais e de documentação.
+
+1. Objetivo do Sistema
+
+Criar um protótipo funcional para:
+
+Cadastrar empreendimentos
+
+Consultar/listar registros
+
+Atualizar informações
+
+Remover registros
+
+Não é curso, não é certificação. É uma etapa técnica de seleção.
+
+2. Tipo de Aplicação (Escolher uma abordagem)
+
+Você deve optar por apenas uma:
+
+🔹 Opção A – Front-end
+
+Aplicação com interface gráfica:
+
+Web
+
+Mobile
+
+Desktop
+
+🔹 Opção B – Back-end
+
+Serviço de gerenciamento de dados:
+
+API REST
+
+GraphQL
+
+Serviço equivalente
+
+A outra camada pode até existir, mas não é obrigatória.
+
+3. Funcionalidades Obrigatórias
+
+O sistema deve permitir o gerenciamento de empreendimentos com os seguintes campos mínimos:
+
+Nome do empreendimento
+
+Nome do(a) empreendedor(a)
+
+Município de Santa Catarina
+
+Segmento (um dos abaixo):
+
+Tecnologia
+
+Comércio
+
+Indústria
+
+Serviços
+
+Agronegócio
+
+E-mail ou meio de contato
+
+Status (ativo/inativo)
+
+Você pode adicionar outros campos, desde que coerentes com o contexto.
+
+4. Requisitos Técnicos
+
+Você pode escolher livremente:
+
+Linguagem
+
+Framework
+
+Arquitetura
+
+Banco de dados (ou outro mecanismo de persistência)
+
+Não é exigido:
+
+Autenticação
+
+Interface sofisticada
+
+Uso de Inteligência Artificial
+
+5. Entrega Obrigatória
+
+Você deve entregar:
+
+Link único de repositório público no GitHub
+
+Código-fonte completo
+
+Arquivo README.md contendo:
+
+Descrição da solução
+
+Tecnologias utilizadas
+
+Estrutura do projeto
+
+Instruções para execução
+
+Link do vídeo pitch
+
+Vídeo pitch (até 3 minutos):
+
+Apresentação da solução
+
+Demonstração (se aplicável)
+
+Explicação das decisões técnicas
+
+Sem README ou sem vídeo → desclassificação.
+
+6. O Que Mais Pesa na Nota
+Pesos de Avaliação
+
+Qualidade do código → 40%
+
+Aderência ao escopo → 30%
+
+Documentação (tamanho e clareza) → 10%
+
+Branches → 10%
+
+Commits organizados → 10%
+
+Resumindo o Escopo em Uma Frase
+
+Construir um CRUD funcional sobre empreendimentos de SC, escolher front ou back, documentar bem, versionar corretamente e demonstrar organização técnica.
