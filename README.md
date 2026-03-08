@@ -117,22 +117,13 @@ O banco SQLite será criado automaticamente na primeira execução.
 
 ---
 
-# Screenshots
+## Screenshots
 
-
-```
-doc/
- ├── TelaPrincipal.png
- └── TelaEmpreendimento.png
-```
-
-```
+### Tela Principal
 ![Tela Principal](doc/TelaPrincipal.png)
-```
 
-```
-![Tela Principal](doc/TelaEmpreendimento.png)
-```
+### Tela Empreendimento
+![Tela Empreendimento](doc/TelaEmpreendimento.png)
 
 ---
 
