@@ -4,7 +4,7 @@ object EmpreendimentoView: TEmpreendimentoView
   BorderIcons = [biSystemMenu]
   Caption = 'Gerenciar Empreendimento'
   ClientHeight = 441
-  ClientWidth = 624
+  ClientWidth = 625
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,10 +17,11 @@ object EmpreendimentoView: TEmpreendimentoView
   object pnlBuscar: TPanel
     Left = 0
     Top = 0
-    Width = 624
+    Width = 625
     Height = 57
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 624
     object lblBuscar: TLabel
       Left = 30
       Top = 25
@@ -48,10 +49,11 @@ object EmpreendimentoView: TEmpreendimentoView
   object pnlCadastro: TPanel
     Left = 0
     Top = 255
-    Width = 624
+    Width = 625
     Height = 145
     Align = alBottom
     TabOrder = 2
+    ExplicitWidth = 624
     object lblNome: TLabel
       Left = 30
       Top = 25
@@ -142,14 +144,15 @@ object EmpreendimentoView: TEmpreendimentoView
   object pnlGrid: TPanel
     Left = 0
     Top = 57
-    Width = 624
+    Width = 625
     Height = 198
     Align = alClient
     TabOrder = 1
+    ExplicitWidth = 624
     object grdEmpreendimentos: TDBGrid
       Left = 1
       Top = 1
-      Width = 622
+      Width = 623
       Height = 196
       Align = alClient
       DataSource = dsrEmpreendimento
@@ -193,12 +196,26 @@ object EmpreendimentoView: TEmpreendimentoView
           Expanded = False
           FieldName = 'segmento'
           Title.Caption = 'Segmento'
+          Width = -1
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'nome_segmento'
+          Title.Caption = 'Segmento'
           Width = 100
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'status'
+          Title.Caption = 'Status'
+          Width = -1
+          Visible = False
+        end
+        item
+          Expanded = False
+          FieldName = 'nome_status'
           Title.Caption = 'Status'
           Width = 80
           Visible = True
@@ -208,10 +225,11 @@ object EmpreendimentoView: TEmpreendimentoView
   object Panel1: TPanel
     Left = 0
     Top = 400
-    Width = 624
+    Width = 625
     Height = 41
     Align = alBottom
     TabOrder = 3
+    ExplicitWidth = 624
     object btnNovo: TButton
       Left = 30
       Top = 6

@@ -155,14 +155,16 @@ begin
     for Emp in Lista do
     begin
 
-      memEmpreendimento.Append;
+      memEmpreendimento.Insert;
 
       memEmpreendimento.FieldByName('id').AsInteger := Emp.ID;
       memEmpreendimento.FieldByName('nome').AsString := Emp.Nome;
       memEmpreendimento.FieldByName('nome_empreendedor').AsString := Emp.NomeEmpreendedor;
       memEmpreendimento.FieldByName('municipio').AsString := Emp.Municipio;
-      memEmpreendimento.FieldByName('segmento').AsInteger := SegmentoToString(Emp.Segmento);
-      memEmpreendimento.FieldByName('status').AsInteger := StatusToString(Emp.Status);
+      memEmpreendimento.FieldByName('segmento').AsInteger := Ord(Emp.Segmento);
+      memEmpreendimento.FieldByName('nome_segmento').AsString := SegmentoToString(Emp.Segmento);
+      memEmpreendimento.FieldByName('status').AsInteger := Ord(Emp.Status);
+      memEmpreendimento.FieldByName('nome_status').AsString := StatusToString(Emp.Status);
 
       memEmpreendimento.Post;
 
@@ -199,7 +201,9 @@ begin
   memEmpreendimento.FieldDefs.Add('nome_empreendedor', ftString, 200);
   memEmpreendimento.FieldDefs.Add('municipio', ftString, 200);
   memEmpreendimento.FieldDefs.Add('segmento', ftString, 50);
+  memEmpreendimento.FieldDefs.Add('nome_segmento', ftString, 50);
   memEmpreendimento.FieldDefs.Add('status', ftString, 20);
+  memEmpreendimento.FieldDefs.Add('nome_status', ftString, 20);
 
   memEmpreendimento.CreateDataSet;
 
@@ -226,8 +230,8 @@ begin
       edtEmpreendedor.Text := Emp.NomeEmpreendedor;
       edtMunicipio.Text := Emp.Municipio;
       edtEmail.Text := Emp.Email;
-      cboSegmento.ItemIndex := SegmentoToString(Emp.Segmento);
-      cboStatus.ItemIndex := StatusToString(Emp.Status);
+      cboSegmento.ItemIndex := Ord(Emp.Segmento);
+      cboStatus.ItemIndex := Ord(Emp.Status);
     end;
 
   finally

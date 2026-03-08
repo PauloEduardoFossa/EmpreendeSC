@@ -7,10 +7,10 @@ type
 
   TSegmento = (segTecnologia, segComercio, segIndustria, segServicos, segAgronegocio);
 
-function StatusToString(AStatus: TStatus): Integer;
+function StatusToString(AStatus: TStatus): string;
 function StringToStatus(const AValue: Integer): TStatus;
 
-function SegmentoToString(ASegmento: TSegmento): Integer;
+function SegmentoToString(ASegmento: TSegmento): string;
 function StringToSegmento(const AValue: Integer): TSegmento;
 
 implementation
@@ -18,15 +18,15 @@ implementation
 uses
   System.SysUtils;
 
-function StatusToString(AStatus: TStatus): Integer;
+function StatusToString(AStatus: TStatus): string;
 begin
  case AStatus of
 
     segAtivo:
-      Result := 0;
+      Result := 'Ativo';
 
     segInativo:
-      Result := 1;
+      Result := 'Inativo';
 
   end;
 end;
@@ -41,25 +41,25 @@ begin
   end;
 end;
 
-function SegmentoToString(ASegmento: TSegmento): Integer;
+function SegmentoToString(ASegmento: TSegmento): string;
 begin
 
   case ASegmento of
 
     segTecnologia:
-      Result := 0;
+      Result := 'Tecnologia';
 
     segComercio:
-      Result := 1;
+      Result := 'Comercio';
 
     segIndustria:
-      Result := 2;
+      Result := 'Indústria';
 
     segServicos:
-      Result := 3;
+      Result := 'Serviços';
 
     segAgronegocio:
-      Result := 4;
+      Result := 'Agronegócio';
 
   end;
 end;
