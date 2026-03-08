@@ -33,8 +33,36 @@ uses
 { TEmpreendimentoRepository }
 
 procedure TEmpreendimentoRepository.Atualizar(AEmpreendimento: TEmpreendimento);
+var
+  Qry: TFDQuery;
 begin
+  Qry := TFDQuery.Create(nil);
+  try
+    Qry.Connection := FConnection;
 
+    Qry.SQL.Text :=
+      'UPDATE empreendimento ' +
+      'SET nome = :nome, ' +
+      '    nome_empreendedor = :nome_empreendedor, ' +
+      '    segmento = :segmento, ' +
+      '    municipio = :municipio, ' +
+      '    email = :email, ' +
+      '    status = :status ' +
+      'WHERE id = :id';
+
+    Qry.ParamByName('nome').AsString := AEmpreendimento.Nome;
+    Qry.ParamByName('nome_empreendedor').AsString := AEmpreendimento.NomeEmpreendedor;
+    Qry.ParamByName('segmento').AsInteger := Ord(AEmpreendimento.Segmento);
+    Qry.ParamByName('municipio').AsString := AEmpreendimento.municipio;
+    Qry.ParamByName('email').AsString := AEmpreendimento.Email;
+    Qry.ParamByName('status').AsInteger := Ord(AEmpreendimento.Status);
+    Qry.ParamByName('id').AsInteger := AEmpreendimento.Id;
+
+    Qry.ExecSQL;
+
+  finally
+    Qry.Free;
+  end;
 end;
 
 constructor TEmpreendimentoRepository.Create(AConnection: TFDConnection);
