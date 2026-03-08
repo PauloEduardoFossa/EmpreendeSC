@@ -222,22 +222,31 @@ object EmpreendimentoView: TEmpreendimentoView
       OnClick = btnNovoClick
     end
     object btnSalvar: TButton
-      Left = 110
-      Top = 5
+      Left = 190
+      Top = 6
       Width = 75
       Height = 25
       Caption = 'Salvar'
-      TabOrder = 1
+      TabOrder = 2
       OnClick = btnSalvarClick
     end
     object btnExluir: TButton
-      Left = 190
-      Top = 5
+      Left = 270
+      Top = 6
       Width = 75
       Height = 25
       Caption = 'Excluir'
-      TabOrder = 2
+      TabOrder = 3
       OnClick = btnExluirClick
+    end
+    object btnEditar: TButton
+      Left = 110
+      Top = 6
+      Width = 75
+      Height = 25
+      Caption = 'Editar'
+      TabOrder = 1
+      OnClick = btnEditarClick
     end
   end
   object dsrEmpreendimento: TDataSource

@@ -35,12 +35,14 @@ type
     btnNovo: TButton;
     btnSalvar: TButton;
     btnExluir: TButton;
+    btnEditar: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btnNovoClick(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure btnExluirClick(Sender: TObject);
     procedure grdEmpreendimentosCellClick(Column: TColumn);
     procedure btrnBuscarClick(Sender: TObject);
+    procedure btnEditarClick(Sender: TObject);
   private
     FRepository : TEmpreendimentoRepository;
     FIDSelecionado : Integer;
@@ -64,6 +66,15 @@ uses
 {$R *.dfm}
 
 { TEmpreendimentoView }
+
+procedure TEmpreendimentoView.btnEditarClick(Sender: TObject);
+begin
+  if FIDSelecionado = 0 then
+    Exit;
+
+  ControlarCampos(True);
+  edtNome.SetFocus;
+end;
 
 procedure TEmpreendimentoView.btnExluirClick(Sender: TObject);
 begin
@@ -157,6 +168,8 @@ begin
 
     end;
 
+    memEmpreendimento.First;
+
   finally
     Lista.Free;
   end;
@@ -173,6 +186,7 @@ begin
 
   btnNovo.Enabled := not AStatus;
   btnExluir.Enabled := not AStatus;
+  btnEditar.Enabled := not AStatus;
   btnSalvar.Enabled := AStatus;
 end;
 
