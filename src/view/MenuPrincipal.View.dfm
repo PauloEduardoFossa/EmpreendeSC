@@ -12,13 +12,13 @@ object MenuPrincipalView: TMenuPrincipalView
   Font.Style = []
   Position = poOwnerFormCenter
   TextHeight = 15
-  object Button1: TButton
-    Left = 280
-    Top = 232
-    Width = 75
+  object btnEmpreendimento: TButton
+    Left = 128
+    Top = 64
+    Width = 249
     Height = 25
-    Caption = 'Button1'
+    Caption = 'Abrir Cadastro de Empreendimento'
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = btnEmpreendimentoClick
   end
 end

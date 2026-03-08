@@ -8,8 +8,8 @@ uses
 
 type
   TMenuPrincipalView = class(TForm)
-    Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    btnEmpreendimento: TButton;
+    procedure btnEmpreendimentoClick(Sender: TObject);
   private
 
   public
@@ -26,7 +26,7 @@ uses
 
 {$R *.dfm}
 
-procedure TMenuPrincipalView.Button1Click(Sender: TObject);
+procedure TMenuPrincipalView.btnEmpreendimentoClick(Sender: TObject);
 var
   Emp: TEmpreendimentoView;
 begin
