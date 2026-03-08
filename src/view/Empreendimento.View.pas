@@ -49,6 +49,7 @@ type
 
     procedure CarregarEmpreendimentos;
     procedure ControlarCampos(AStatus: Boolean);
+    procedure Filtrar(ATexto: string);
     procedure LimparCampos;
     procedure PreencherCombos;
   public
@@ -61,7 +62,9 @@ var
 implementation
 
 uses
-  dmDataBase, Empreendimento.Model, System.UITypes;
+  dmDataBase,
+  Empreendimento.Model,
+  System.UITypes;
 
 {$R *.dfm}
 
@@ -145,8 +148,8 @@ var
   Lista : TObjectList<TEmpreendimento>;
   Emp : TEmpreendimento;
 begin
-
   memEmpreendimento.EmptyDataSet;
+  memEmpreendimento.Filtered := False;
 
   Lista := FRepository.Listar;
 
@@ -170,8 +173,11 @@ begin
 
     end;
 
-    memEmpreendimento.First;
-
+    if memEmpreendimento.RecordCount > 0 then
+    begin
+      memEmpreendimento.First;
+      Filtrar(edtBuscar.Text);
+    end;
   finally
     Lista.Free;
   end;
@@ -190,6 +196,21 @@ begin
   btnExluir.Enabled := not AStatus;
   btnEditar.Enabled := not AStatus;
   btnSalvar.Enabled := AStatus;
+end;
+
+procedure TEmpreendimentoView.Filtrar(ATexto: string);
+begin
+  memEmpreendimento.Filtered := False;
+
+  if ATexto.Trim = '' then
+    Exit;
+
+  memEmpreendimento.Filter :=
+    'nome LIKE ''%' + ATexto + '%'' OR ' +
+    'nome_empreendedor LIKE ''%' + ATexto + '%'' OR ' +
+    'municipio LIKE ''%' + ATexto + '%''';
+
+  memEmpreendimento.Filtered := True;
 end;
 
 procedure TEmpreendimentoView.FormCreate(Sender: TObject);
