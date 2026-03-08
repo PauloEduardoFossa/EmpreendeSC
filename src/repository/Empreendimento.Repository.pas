@@ -43,8 +43,18 @@ begin
 end;
 
 procedure TEmpreendimentoRepository.Excluir(AId: Integer);
+var
+  EmpreendimentoQuery: TFDQuery;
 begin
-
+  EmpreendimentoQuery := TFDQuery.Create(nil);
+  try
+    EmpreendimentoQuery.Connection := FConnection;
+    EmpreendimentoQuery.SQL.Text := 'DELETE FROM empreendimento WHERE id = :id';
+    EmpreendimentoQuery.ParamByName('id').AsInteger := AId;
+    EmpreendimentoQuery.ExecSQL;
+  finally
+    EmpreendimentoQuery.Free;
+  end;
 end;
 
 procedure TEmpreendimentoRepository.Inserir(AEmpreendimento: TEmpreendimento);
