@@ -46,8 +46,9 @@ type
     FIDSelecionado : Integer;
 
     procedure CarregarEmpreendimentos;
-    procedure PreencherCombos;
+    procedure ControlarCampos(AStatus: Boolean);
     procedure LimparCampos;
+    procedure PreencherCombos;
   public
 
   end;
@@ -77,6 +78,9 @@ begin
   CarregarEmpreendimentos;
 
   LimparCampos;
+
+  ControlarCampos(False);
+  edtBuscar.SetFocus;
 end;
 
 procedure TEmpreendimentoView.btnNovoClick(Sender: TObject);
@@ -84,6 +88,8 @@ begin
   FIDSelecionado := 0;
 
   LimparCampos;
+  ControlarCampos(True);
+  edtNome.SetFocus;
 end;
 
 procedure TEmpreendimentoView.btnSalvarClick(Sender: TObject);
@@ -111,7 +117,8 @@ begin
     CarregarEmpreendimentos;
 
     LimparCampos;
-
+    ControlarCampos(False);
+    edtBuscar.SetFocus;
   finally
     Emp.Free;
   end;
@@ -155,6 +162,20 @@ begin
   end;
 end;
 
+procedure TEmpreendimentoView.ControlarCampos(AStatus: Boolean);
+begin
+  edtNome.Enabled := AStatus;
+  edtEmpreendedor.Enabled := AStatus;
+  edtMunicipio.Enabled := AStatus;
+  edtEmail.Enabled := AStatus;
+  cboSegmento.Enabled := AStatus;
+  cboStatus.Enabled := AStatus;
+
+  btnNovo.Enabled := not AStatus;
+  btnExluir.Enabled := not AStatus;
+  btnSalvar.Enabled := AStatus;
+end;
+
 procedure TEmpreendimentoView.FormCreate(Sender: TObject);
 begin
   FRepository := TEmpreendimentoRepository.Create(DM.Con);
@@ -171,6 +192,7 @@ begin
   PreencherCombos;
 
   CarregarEmpreendimentos;
+  ControlarCampos(False);
 end;
 
 procedure TEmpreendimentoView.grdEmpreendimentosCellClick(Column: TColumn);

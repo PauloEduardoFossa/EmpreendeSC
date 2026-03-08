@@ -1,6 +1,7 @@
 object MenuPrincipalView: TMenuPrincipalView
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'EmpreendeSC'
   ClientHeight = 441
   ClientWidth = 624
@@ -13,7 +14,7 @@ object MenuPrincipalView: TMenuPrincipalView
   Position = poOwnerFormCenter
   TextHeight = 15
   object btnEmpreendimento: TButton
-    Left = 128
+    Left = 176
     Top = 64
     Width = 249
     Height = 25

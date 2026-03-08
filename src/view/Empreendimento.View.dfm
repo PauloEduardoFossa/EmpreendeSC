@@ -1,6 +1,7 @@
 object EmpreendimentoView: TEmpreendimentoView
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Gerenciar Empreendimento'
   ClientHeight = 441
   ClientWidth = 624
@@ -99,7 +100,6 @@ object EmpreendimentoView: TEmpreendimentoView
       Width = 200
       Height = 23
       TabOrder = 0
-      Text = 'edtNome'
     end
     object edtEmpreendedor: TEdit
       Left = 120
@@ -153,6 +153,7 @@ object EmpreendimentoView: TEmpreendimentoView
       Height = 196
       Align = alClient
       DataSource = dsrEmpreendimento
+      ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -213,7 +214,7 @@ object EmpreendimentoView: TEmpreendimentoView
     TabOrder = 3
     object btnNovo: TButton
       Left = 30
-      Top = 5
+      Top = 6
       Width = 75
       Height = 25
       Caption = 'Novo'
@@ -221,7 +222,7 @@ object EmpreendimentoView: TEmpreendimentoView
       OnClick = btnNovoClick
     end
     object btnSalvar: TButton
-      Left = 115
+      Left = 110
       Top = 5
       Width = 75
       Height = 25
@@ -230,7 +231,7 @@ object EmpreendimentoView: TEmpreendimentoView
       OnClick = btnSalvarClick
     end
     object btnExluir: TButton
-      Left = 195
+      Left = 190
       Top = 5
       Width = 75
       Height = 25
