@@ -9,11 +9,14 @@ uses
   Database.Connection in 'infra\Database.Connection.pas',
   dmDataBase in 'infra\dmDataBase.pas' {DM: TDataModule},
   Empreendimento.View in 'view\Empreendimento.View.pas' {EmpreendimentoView},
-  Empreendimento.Enums in 'model\Empreendimento.Enums.pas';
+  Empreendimento.Enums in 'model\Empreendimento.Enums.pas',
+  App.Constants in 'common\App.Constants.pas';
 
 {$R *.res}
 
 begin
+  ReportMemoryLeaksOnShutdown := True;
+
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
 

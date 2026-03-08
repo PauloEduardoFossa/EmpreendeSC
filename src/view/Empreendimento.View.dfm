@@ -12,6 +12,7 @@ object EmpreendimentoView: TEmpreendimentoView
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poOwnerFormCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   TextHeight = 15
   object pnlBuscar: TPanel

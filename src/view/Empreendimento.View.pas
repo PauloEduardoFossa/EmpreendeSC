@@ -46,6 +46,7 @@ type
     procedure grdEmpreendimentosCellClick(Column: TColumn);
     procedure btrnBuscarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     FRepository : TEmpreendimentoRepository;
     FIDSelecionado : Integer;
@@ -68,6 +69,7 @@ uses
   App.Constants,
   dmDataBase,
   Empreendimento.Model,
+  System.UITypes,
   System.SysUtils;
 
 {$R *.dfm}
@@ -209,6 +211,11 @@ begin
   memEmpreendimento.Filter := StringReplace(BUSCAR_EMPREENDIMENTO, FILTRO_VALOR, ATexto, [rfReplaceAll]);
 
   memEmpreendimento.Filtered := True;
+end;
+
+procedure TEmpreendimentoView.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  FRepository.Destroy;
 end;
 
 procedure TEmpreendimentoView.FormCreate(Sender: TObject);

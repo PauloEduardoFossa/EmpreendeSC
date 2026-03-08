@@ -145,6 +145,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="model\Empreendimento.Enums.pas"/>
+        <DCCReference Include="common\App.Constants.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -171,7 +172,7 @@
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="4">
-                <DeployFile LocalName="Win32\Debug\EmpreendeSC.exe" Configuration="Debug" Class="ProjectOutput">
+                <DeployFile LocalName="..\bin\EmpreendeSC.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>EmpreendeSC.exe</RemoteName>
                         <Overwrite>true</Overwrite>
