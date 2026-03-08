@@ -121,7 +121,7 @@ O banco SQLite será criado automaticamente na primeira execução.
 
 
 ```
-docs/
+doc/
  ├── TelaPrincipal.png
  └── TelaEmpreendimento.png
 ```
