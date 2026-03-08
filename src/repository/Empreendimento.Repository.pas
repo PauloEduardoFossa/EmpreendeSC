@@ -26,6 +26,7 @@ type
 implementation
 
 uses
+  App.Constants,
   Data.DB,
   Empreendimento.Enums,
   FireDAC.Stan.Param;
@@ -34,34 +35,25 @@ uses
 
 procedure TEmpreendimentoRepository.Atualizar(AEmpreendimento: TEmpreendimento);
 var
-  Qry: TFDQuery;
+  LQry: TFDQuery;
 begin
-  Qry := TFDQuery.Create(nil);
+  LQry := TFDQuery.Create(nil);
   try
-    Qry.Connection := FConnection;
+    LQry.Connection := FConnection;
 
-    Qry.SQL.Text :=
-      'UPDATE empreendimento ' +
-      'SET nome = :nome, ' +
-      '    nome_empreendedor = :nome_empreendedor, ' +
-      '    segmento = :segmento, ' +
-      '    municipio = :municipio, ' +
-      '    email = :email, ' +
-      '    status = :status ' +
-      'WHERE id = :id';
+    LQry.SQL.Text := UPDATE_EMPREENDIMENTO;
 
-    Qry.ParamByName('nome').AsString := AEmpreendimento.Nome;
-    Qry.ParamByName('nome_empreendedor').AsString := AEmpreendimento.NomeEmpreendedor;
-    Qry.ParamByName('segmento').AsInteger := Ord(AEmpreendimento.Segmento);
-    Qry.ParamByName('municipio').AsString := AEmpreendimento.municipio;
-    Qry.ParamByName('email').AsString := AEmpreendimento.Email;
-    Qry.ParamByName('status').AsInteger := Ord(AEmpreendimento.Status);
-    Qry.ParamByName('id').AsInteger := AEmpreendimento.Id;
+    LQry.ParamByName('nome').AsString := AEmpreendimento.Nome;
+    LQry.ParamByName('nome_empreendedor').AsString := AEmpreendimento.NomeEmpreendedor;
+    LQry.ParamByName('segmento').AsInteger := Ord(AEmpreendimento.Segmento);
+    LQry.ParamByName('municipio').AsString := AEmpreendimento.municipio;
+    LQry.ParamByName('email').AsString := AEmpreendimento.Email;
+    LQry.ParamByName('status').AsInteger := Ord(AEmpreendimento.Status);
+    LQry.ParamByName('id').AsInteger := AEmpreendimento.Id;
 
-    Qry.ExecSQL;
-
+    LQry.ExecSQL;
   finally
-    Qry.Free;
+    LQry.Free;
   end;
 end;
 
@@ -72,169 +64,134 @@ end;
 
 procedure TEmpreendimentoRepository.Excluir(AId: Integer);
 var
-  EmpreendimentoQuery: TFDQuery;
+  LQry: TFDQuery;
 begin
-  EmpreendimentoQuery := TFDQuery.Create(nil);
+  LQry := TFDQuery.Create(nil);
   try
-    EmpreendimentoQuery.Connection := FConnection;
-    EmpreendimentoQuery.SQL.Text := 'DELETE FROM empreendimento WHERE id = :id';
-    EmpreendimentoQuery.ParamByName('id').AsInteger := AId;
-    EmpreendimentoQuery.ExecSQL;
+    LQry.Connection := FConnection;
+    LQry.SQL.Text := DELETE_EMPREENDIMENTO;
+    LQry.ParamByName('id').AsInteger := AId;
+    LQry.ExecSQL;
   finally
-    EmpreendimentoQuery.Free;
+    LQry.Free;
   end;
 end;
 
 procedure TEmpreendimentoRepository.Inserir(AEmpreendimento: TEmpreendimento);
 var
-  EmpreendimentoQuery: TFDQuery;
+  LQry: TFDQuery;
 begin
-  EmpreendimentoQuery := TFDQuery.Create(nil);
+  LQry := TFDQuery.Create(nil);
   try
-    EmpreendimentoQuery.Connection := FConnection;
-    EmpreendimentoQuery.SQL.Text :=
-      'INSERT INTO empreendimento ' +
-      '(data_cadastro, nome, nome_empreendedor, municipio, segmento, email, status) ' +
-      'VALUES (:data, :nome, :nomeResp, :municipio, :segmento, :email, :status)';
+    LQry.Connection := FConnection;
+    LQry.SQL.Text := INSERT_EMPREENDIMENTO;
 
-    EmpreendimentoQuery.ParamByName('data').AsDateTime := AEmpreendimento.DataCadastro;
-    EmpreendimentoQuery.ParamByName('nome').AsString := AEmpreendimento.Nome;
-    EmpreendimentoQuery.ParamByName('nomeResp').AsString := AEmpreendimento.NomeEmpreendedor;
-    EmpreendimentoQuery.ParamByName('municipio').AsString := AEmpreendimento.Municipio;
-    EmpreendimentoQuery.ParamByName('segmento').AsInteger := Ord(AEmpreendimento.Segmento);
-    EmpreendimentoQuery.ParamByName('email').AsString := AEmpreendimento.Email;
-    EmpreendimentoQuery.ParamByName('status').AsInteger := Ord(AEmpreendimento.Status);
+    LQry.ParamByName('data').AsDateTime := AEmpreendimento.DataCadastro;
+    LQry.ParamByName('nome').AsString := AEmpreendimento.Nome;
+    LQry.ParamByName('nomeResp').AsString := AEmpreendimento.NomeEmpreendedor;
+    LQry.ParamByName('municipio').AsString := AEmpreendimento.Municipio;
+    LQry.ParamByName('segmento').AsInteger := Ord(AEmpreendimento.Segmento);
+    LQry.ParamByName('email').AsString := AEmpreendimento.Email;
+    LQry.ParamByName('status').AsInteger := Ord(AEmpreendimento.Status);
 
-    EmpreendimentoQuery.ExecSQL;
+    LQry.ExecSQL;
   finally
-    EmpreendimentoQuery.Free;
+    LQry.Free;
   end;
 end;
 
 function TEmpreendimentoRepository.Listar: TObjectList<TEmpreendimento>;
 var
-  Query: TFDQuery;
-  Empreendimento: TEmpreendimento;
+  LQry: TFDQuery;
+  LEmp: TEmpreendimento;
 begin
 
   Result := TObjectList<TEmpreendimento>.Create;
 
-  Query := TFDQuery.Create(nil);
+  LQry := TFDQuery.Create(nil);
 
   try
 
-    Query.Connection := FConnection;
+    LQry.Connection := FConnection;
 
-    Query.SQL.Text :=
-      'SELECT ' +
-      ' id, ' +
-      ' nome, ' +
-      ' nome_empreendedor, ' +
-      ' municipio, ' +
-      ' segmento, ' +
-      ' email, ' +
-      ' status ' +
-      'FROM empreendimento ' +
-      'ORDER BY nome';
+    LQry.SQL.Text := CONSULTA_EMPREENDIMENTO;
 
-    Query.Open;
+    LQry.Open;
 
-    while not Query.Eof do
+    while not LQry.Eof do
     begin
 
-      Empreendimento := TEmpreendimento.Create;
+      LEmp := TEmpreendimento.Create;
 
-      Empreendimento.ID :=
-        Query.FieldByName('id').AsInteger;
+      LEmp.ID :=
+        LQry.FieldByName('id').AsInteger;
 
-      Empreendimento.Nome :=
-        Query.FieldByName('nome').AsString;
+      LEmp.Nome :=
+        LQry.FieldByName('nome').AsString;
 
-      Empreendimento.NomeEmpreendedor :=
-        Query.FieldByName('nome_empreendedor').AsString;
+      LEmp.NomeEmpreendedor :=
+        LQry.FieldByName('nome_empreendedor').AsString;
 
-      Empreendimento.Municipio :=
-        Query.FieldByName('municipio').AsString;
+      LEmp.Municipio :=
+        LQry.FieldByName('municipio').AsString;
 
-      Empreendimento.Email :=
-        Query.FieldByName('email').AsString;
+      LEmp.Email :=
+        LQry.FieldByName('email').AsString;
 
-      Empreendimento.Segmento :=
-        StringToSegmento(Query.FieldByName('segmento').AsInteger);
+      LEmp.Segmento :=
+        StringToSegmento(LQry.FieldByName('segmento').AsInteger);
 
-      Empreendimento.Status :=
-        StringToStatus(Query.FieldByName('status').AsInteger);
+      LEmp.Status :=
+        StringToStatus(LQry.FieldByName('status').AsInteger);
 
-      Result.Add(Empreendimento);
+      Result.Add(LEmp);
 
-      Query.Next;
+      LQry.Next;
 
     end;
 
   finally
-    Query.Free;
+    LQry.Free;
   end;
 end;
 
 function TEmpreendimentoRepository.ObterPorId(AId: Integer): TEmpreendimento;
 var
-  Query: TFDQuery;
+  LQry: TFDQuery;
 begin
-
   Result := nil;
 
-  Query := TFDQuery.Create(nil);
+  LQry := TFDQuery.Create(nil);
 
   try
+    LQry.Connection := FConnection;
 
-    Query.Connection := FConnection;
+    LQry.SQL.Text := CONSULTA_EMPREENDIMENTO + FILTRO_EMPREENDIMENTO;
 
-    Query.SQL.Text :=
-      'SELECT ' +
-      ' id, ' +
-      ' nome, ' +
-      ' nome_empreendedor, ' +
-      ' municipio, ' +
-      ' segmento, ' +
-      ' email, ' +
-      ' status ' +
-      'FROM empreendimento ' +
-      'WHERE id = :id';
+    LQry.ParamByName('id').AsInteger := AID;
 
-    Query.ParamByName('id').AsInteger := AID;
+    LQry.Open;
 
-    Query.Open;
-
-    if not Query.IsEmpty then
+    if not LQry.IsEmpty then
     begin
-
       Result := TEmpreendimento.Create;
 
-      Result.ID :=
-        Query.FieldByName('id').AsInteger;
+      Result.ID := LQry.FieldByName('id').AsInteger;
 
-      Result.Nome :=
-        Query.FieldByName('nome').AsString;
+      Result.Nome := LQry.FieldByName('nome').AsString;
 
-      Result.NomeEmpreendedor :=
-        Query.FieldByName('nome_empreendedor').AsString;
+      Result.NomeEmpreendedor := LQry.FieldByName('nome_empreendedor').AsString;
 
-      Result.Municipio :=
-        Query.FieldByName('municipio').AsString;
+      Result.Municipio := LQry.FieldByName('municipio').AsString;
 
-      Result.Email :=
-        Query.FieldByName('email').AsString;
+      Result.Email := LQry.FieldByName('email').AsString;
 
-      Result.Segmento :=
-        StringToSegmento(Query.FieldByName('segmento').AsInteger);
+      Result.Segmento := StringToSegmento(LQry.FieldByName('segmento').AsInteger);
 
-      Result.Status :=
-        StringToStatus(Query.FieldByName('status').AsInteger);
-
+      Result.Status := StringToStatus(LQry.FieldByName('status').AsInteger);
     end;
-
   finally
-    Query.Free;
+    LQry.Free;
   end;
 end;
 

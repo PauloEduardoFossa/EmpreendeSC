@@ -3,10 +3,13 @@ unit Empreendimento.View;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, System.Generics.Collections,
+  Winapi.Windows, Winapi.Messages, System.Variants, System.Classes, System.Generics.Collections,
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Empreendimento.Repository, Empreendimento.Enums;
+  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+
+  Empreendimento.Enums,
+  Empreendimento.Repository;
 
 type
   TEmpreendimentoView = class(TForm)
@@ -62,9 +65,10 @@ var
 implementation
 
 uses
+  App.Constants,
   dmDataBase,
   Empreendimento.Model,
-  System.UITypes;
+  System.SysUtils;
 
 {$R *.dfm}
 
@@ -108,25 +112,25 @@ end;
 
 procedure TEmpreendimentoView.btnSalvarClick(Sender: TObject);
 var
-  Emp : TEmpreendimento;
+  LEmp : TEmpreendimento;
 begin
-  Emp := TEmpreendimento.Create;
+  LEmp := TEmpreendimento.Create;
 
   try
-    Emp.ID := FIDSelecionado;
-    Emp.Nome := edtNome.Text;
-    Emp.NomeEmpreendedor := edtEmpreendedor.Text;
-    Emp.Municipio := edtMunicipio.Text;
-    Emp.Email := edtEmail.Text;
+    LEmp.ID := FIDSelecionado;
+    LEmp.Nome := edtNome.Text;
+    LEmp.NomeEmpreendedor := edtEmpreendedor.Text;
+    LEmp.Municipio := edtMunicipio.Text;
+    LEmp.Email := edtEmail.Text;
 
-    Emp.Segmento := StringToSegmento(cboSegmento.ItemIndex);
+    LEmp.Segmento := StringToSegmento(cboSegmento.ItemIndex);
 
-    Emp.Status := StringToStatus(cboStatus.ItemIndex);
+    LEmp.Status := StringToStatus(cboStatus.ItemIndex);
 
-    if Emp.ID = 0 then
-      FRepository.Inserir(Emp)
+    if LEmp.ID = 0 then
+      FRepository.Inserir(LEmp)
     else
-      FRepository.Atualizar(Emp);
+      FRepository.Atualizar(LEmp);
 
     CarregarEmpreendimentos;
 
@@ -134,7 +138,7 @@ begin
     ControlarCampos(False);
     edtBuscar.SetFocus;
   finally
-    Emp.Free;
+    LEmp.Free;
   end;
 end;
 
@@ -145,32 +149,29 @@ end;
 
 procedure TEmpreendimentoView.CarregarEmpreendimentos;
 var
-  Lista : TObjectList<TEmpreendimento>;
-  Emp : TEmpreendimento;
+  LLista : TObjectList<TEmpreendimento>;
+  LEmp : TEmpreendimento;
 begin
   memEmpreendimento.EmptyDataSet;
   memEmpreendimento.Filtered := False;
 
-  Lista := FRepository.Listar;
+  LLista := FRepository.Listar;
 
   try
-
-    for Emp in Lista do
+    for LEmp in LLista do
     begin
-
       memEmpreendimento.Insert;
 
-      memEmpreendimento.FieldByName('id').AsInteger := Emp.ID;
-      memEmpreendimento.FieldByName('nome').AsString := Emp.Nome;
-      memEmpreendimento.FieldByName('nome_empreendedor').AsString := Emp.NomeEmpreendedor;
-      memEmpreendimento.FieldByName('municipio').AsString := Emp.Municipio;
-      memEmpreendimento.FieldByName('segmento').AsInteger := Ord(Emp.Segmento);
-      memEmpreendimento.FieldByName('nome_segmento').AsString := SegmentoToString(Emp.Segmento);
-      memEmpreendimento.FieldByName('status').AsInteger := Ord(Emp.Status);
-      memEmpreendimento.FieldByName('nome_status').AsString := StatusToString(Emp.Status);
+      memEmpreendimento.FieldByName('id').AsInteger := LEmp.ID;
+      memEmpreendimento.FieldByName('nome').AsString := LEmp.Nome;
+      memEmpreendimento.FieldByName('nome_empreendedor').AsString := LEmp.NomeEmpreendedor;
+      memEmpreendimento.FieldByName('municipio').AsString := LEmp.Municipio;
+      memEmpreendimento.FieldByName('segmento').AsInteger := Ord(LEmp.Segmento);
+      memEmpreendimento.FieldByName('nome_segmento').AsString := SegmentoToString(LEmp.Segmento);
+      memEmpreendimento.FieldByName('status').AsInteger := Ord(LEmp.Status);
+      memEmpreendimento.FieldByName('nome_status').AsString := StatusToString(LEmp.Status);
 
       memEmpreendimento.Post;
-
     end;
 
     if memEmpreendimento.RecordCount > 0 then
@@ -179,7 +180,7 @@ begin
       Filtrar(edtBuscar.Text);
     end;
   finally
-    Lista.Free;
+    LLista.Free;
   end;
 end;
 
@@ -205,10 +206,7 @@ begin
   if ATexto.Trim = '' then
     Exit;
 
-  memEmpreendimento.Filter :=
-    'nome LIKE ''%' + ATexto + '%'' OR ' +
-    'nome_empreendedor LIKE ''%' + ATexto + '%'' OR ' +
-    'municipio LIKE ''%' + ATexto + '%''';
+  memEmpreendimento.Filter := StringReplace(BUSCAR_EMPREENDIMENTO, FILTRO_VALOR, ATexto, [rfReplaceAll]);
 
   memEmpreendimento.Filtered := True;
 end;
@@ -236,27 +234,27 @@ end;
 
 procedure TEmpreendimentoView.grdEmpreendimentosCellClick(Column: TColumn);
 var
-  Emp: TEmpreendimento;
+  LEmp: TEmpreendimento;
 begin
 
   FIDSelecionado := memEmpreendimento.FieldByName('id').AsInteger;
 
-  Emp := FRepository.ObterPorId(FIDSelecionado);
+  LEmp := FRepository.ObterPorId(FIDSelecionado);
 
   try
 
-    if Assigned(Emp) then
+    if Assigned(LEmp) then
     begin
-      edtNome.Text := Emp.Nome;
-      edtEmpreendedor.Text := Emp.NomeEmpreendedor;
-      edtMunicipio.Text := Emp.Municipio;
-      edtEmail.Text := Emp.Email;
-      cboSegmento.ItemIndex := Ord(Emp.Segmento);
-      cboStatus.ItemIndex := Ord(Emp.Status);
+      edtNome.Text := LEmp.Nome;
+      edtEmpreendedor.Text := LEmp.NomeEmpreendedor;
+      edtMunicipio.Text := LEmp.Municipio;
+      edtEmail.Text := LEmp.Email;
+      cboSegmento.ItemIndex := Ord(LEmp.Segmento);
+      cboStatus.ItemIndex := Ord(LEmp.Status);
     end;
 
   finally
-    Emp.Free;
+    LEmp.Free;
   end;
 end;
 

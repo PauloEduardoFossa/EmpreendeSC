@@ -22,21 +22,22 @@ var
 implementation
 
 uses
-  Database.Connection, Empreendimento.View;
+  Database.Connection,
+  Empreendimento.View;
 
 {$R *.dfm}
 
 procedure TMenuPrincipalView.btnEmpreendimentoClick(Sender: TObject);
 var
-  Emp: TEmpreendimentoView;
+  LEmp: TEmpreendimentoView;
 begin
-  Emp := TEmpreendimentoView.Create(nil);
+  LEmp := TEmpreendimentoView.Create(nil);
 
   try
-    Emp.ShowModal;
+    LEmp.ShowModal;
 
   finally
-    Emp.Destroy;
+    LEmp.Destroy;
   end;
 end;
 
