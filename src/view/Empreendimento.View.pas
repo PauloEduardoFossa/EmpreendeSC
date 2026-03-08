@@ -21,8 +21,6 @@ type
     edtNome: TEdit;
     lblEmpreendedor: TLabel;
     edtEmpreendedor: TEdit;
-    Label3: TLabel;
-    Edit3: TEdit;
     lblMunicipio: TLabel;
     edtMunicipio: TEdit;
     lblEmail: TLabel;
@@ -42,6 +40,7 @@ type
     procedure btnSalvarClick(Sender: TObject);
     procedure btnExluirClick(Sender: TObject);
     procedure grdEmpreendimentosCellClick(Column: TColumn);
+    procedure btrnBuscarClick(Sender: TObject);
   private
     FRepository : TEmpreendimentoRepository;
     FIDSelecionado : Integer;
@@ -116,6 +115,11 @@ begin
   finally
     Emp.Free;
   end;
+end;
+
+procedure TEmpreendimentoView.btrnBuscarClick(Sender: TObject);
+begin
+  CarregarEmpreendimentos
 end;
 
 procedure TEmpreendimentoView.CarregarEmpreendimentos;

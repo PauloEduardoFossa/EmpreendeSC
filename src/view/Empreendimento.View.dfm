@@ -13,13 +13,6 @@ object EmpreendimentoView: TEmpreendimentoView
   Position = poOwnerFormCenter
   OnCreate = FormCreate
   TextHeight = 15
-  object Label3: TLabel
-    Left = 38
-    Top = 33
-    Width = 34
-    Height = 15
-    Caption = 'Label1'
-  end
   object pnlBuscar: TPanel
     Left = 0
     Top = 0
@@ -27,7 +20,6 @@ object EmpreendimentoView: TEmpreendimentoView
     Height = 57
     Align = alTop
     TabOrder = 0
-    ExplicitTop = -6
     object lblBuscar: TLabel
       Left = 30
       Top = 25
@@ -42,6 +34,7 @@ object EmpreendimentoView: TEmpreendimentoView
       Height = 25
       Caption = 'Buscar'
       TabOrder = 1
+      OnClick = btrnBuscarClick
     end
     object edtBuscar: TEdit
       Left = 75
@@ -58,7 +51,6 @@ object EmpreendimentoView: TEmpreendimentoView
     Height = 145
     Align = alBottom
     TabOrder = 2
-    ExplicitTop = 301
     object lblNome: TLabel
       Left = 30
       Top = 25
@@ -154,10 +146,6 @@ object EmpreendimentoView: TEmpreendimentoView
     Height = 198
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 232
-    ExplicitTop = 224
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object grdEmpreendimentos: TDBGrid
       Left = 1
       Top = 1
@@ -216,23 +204,13 @@ object EmpreendimentoView: TEmpreendimentoView
         end>
     end
   end
-  object Edit3: TEdit
-    Left = 83
-    Top = 30
-    Width = 121
-    Height = 23
-    TabOrder = 3
-    Text = 'Edit1'
-  end
   object Panel1: TPanel
     Left = 0
     Top = 400
     Width = 624
     Height = 41
     Align = alBottom
-    TabOrder = 4
-    ExplicitLeft = -16
-    ExplicitTop = 423
+    TabOrder = 3
     object btnNovo: TButton
       Left = 30
       Top = 5
