@@ -9,7 +9,8 @@ uses
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
 
   Empreendimento.Enums,
-  Empreendimento.Repository;
+  Empreendimento.Repository,
+  Empreendimento.Repository.Interfacee;
 
 type
   TEmpreendimentoView = class(TForm)
@@ -46,9 +47,8 @@ type
     procedure grdEmpreendimentosCellClick(Column: TColumn);
     procedure btrnBuscarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    FRepository : TEmpreendimentoRepository;
+    FRepository : IEmpreendimentoRepository;
     FIDSelecionado : Integer;
 
     procedure CarregarEmpreendimentos;
@@ -211,11 +211,6 @@ begin
   memEmpreendimento.Filter := StringReplace(BUSCAR_EMPREENDIMENTO, FILTRO_VALOR, ATexto, [rfReplaceAll]);
 
   memEmpreendimento.Filtered := True;
-end;
-
-procedure TEmpreendimentoView.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  FRepository.Destroy;
 end;
 
 procedure TEmpreendimentoView.FormCreate(Sender: TObject);
